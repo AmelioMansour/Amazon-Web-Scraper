@@ -1,6 +1,4 @@
-# Amazon-Web-Scraper
-
-How to Use
+# How to Use
 Enter the URL of an Amazon product into the input field.
 Click 'Scrape' to start the price comparison process.
 View the results, which will include prices from different retailers and a link to each product page.
