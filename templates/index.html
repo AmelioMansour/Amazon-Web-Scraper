@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Scraper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .header h1 {
+            color: #2e7d32; /* Dark Green Color */
+        }
+        .header p {
+            font-size: 16px;
+            color: #424242; /* Dark Grey Color */
+        }
+        .btn {
+            background-color: #ff9800; /* Orange Color */
+        }
+        label {
+            color: #26a69a; /* Teal Color */
+        }
+        .input-field input[type=text]:focus + label {
+            color: #ff9800; /* Orange Color for Active State */
+        }
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #ff9800; /* Orange Border for Active Input */
+            box-shadow: 0 1px 0 0 #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Amazon Price Scraper</h1>
+            <p>This tool allows you to scrape and compare prices from various online retailers for a specified Amazon product. Simply enter the URL of the Amazon product, and the scraper will do the rest.<br><br>Developed by Amelio Mansour as a final project for Script Programming 3680.</p>
+            <p>Please give the Scraper 10-15 seconds to generate the results. 
+                You will be routed automatically to the results page</p>
+        </div>
+        <form action='/scrape' method="POST" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" id="url" name="url" class="validate">
+                    <label for="url">Product URL:</label>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn">Scrape</button>
+        </form>
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

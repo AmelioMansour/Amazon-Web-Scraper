@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scraping Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            /* Light grey background */
+        }
+
+        .header {
+            text-align: center;
+            color: #2e7d32;
+            /* Dark green color */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #bdbdbd;
+            /* Light grey border */
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4db6ac;
+            /* Teal background */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e0f2f1;
+            /* Lighter teal background */
+        }
+
+        .card-panel {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="header">Scraping Results</h1>
+
+        <div class="card-panel teal lighten-2">
+            <span class="white-text">
+                Best Price Information:<br>
+                Site: {{ best_price.site }}<br>
+                Price: {{ best_price.price }}
+            </span>
+        </div>
+
+        <table class="striped responsive-table">
+            <!-- Table Header -->
+            <thead>
+                <tr>
+                    <th>Site</th>
+                    <th>Link</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+                {% for product in data %}
+                <tr>
+                    <td>{{ product.site }}</td>
+                    <td>
+                        {% if product.link != 'Not found' %}
+                        <a href="{{ product.link }}" target="_blank">Link</a>
+                        {% else %}
+                        {{ product.link }}
+                        {% endif %}
+                    </td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="header">Price Comparison</h2>
+        <canvas id="priceChart"></canvas> <!-- Canvas for Chart.js -->
+        <script>
+            var ctx = document.getElementById('priceChart').getContext('2d');
+            var priceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        {% for product in data %}
+                            "{{ product.site }}",
+                        {% endfor %}
+                    ],
+            datasets: [{
+                label: 'Price in $',
+                data: [
+                    27.24, 35.63, 29.98, 27.99
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)'
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                    // ... More colors if needed ...
+                ],
+                borderWidth: 1.5
+            }]
+                },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+            });
+        </script>
+        <div class="center-align" style="margin-top: 20px;">
+            <a href="/" class="waves-effect waves-light btn">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
